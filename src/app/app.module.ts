@@ -20,7 +20,7 @@ const appRoutes: Routes =[
   {path:'vehicles', component: VehiclesComponent, children: [
     {path:'cars' , component: CarsComponent},
     {path:'cars/:model/:id', component: CarComponent}
-  ]},
+    ]},
   {path:'contact', component: ContactComponent}
 ]
 @NgModule({
