@@ -19,7 +19,4 @@ export class CarsComponent implements OnInit {
 
   }
 
-  // openCar(){
-  //   this.router.navigate([''])
-  // }
 }

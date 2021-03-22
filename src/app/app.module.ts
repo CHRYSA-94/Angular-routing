@@ -3,43 +3,41 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { ContactComponent } from './contact/contact.component';
 import { RouterModule, Routes } from '@angular/router';
-import { CarsComponent } from './vehicles/cars/cars.component';
-import { CarComponent } from './vehicles/cars/car/car.component';
 import { MatButtonModule} from '@angular/material/button';
 import { MatTabsModule} from '@angular/material/tabs';
-import { MatCardModule} from '@angular/material/card';
-import {MatMenuModule} from '@angular/material/menu';
+import { HomeModule } from './home/home.module';
+import { VehiclesModule } from './vehicles/vehicles.module';
+import { ContactModule } from './contact/contact.module';
 
 
 const appRoutes: Routes =[
-  {path:'', component: HomeComponent},
-  {path:'vehicles', component: VehiclesComponent, children: [
-    {path:'cars' , component: CarsComponent},
-    {path:'cars/:model/:id', component: CarComponent}
-    ]},
-  {path:'contact', component: ContactComponent}
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "home",
+    loadChildren: () =>
+      import("./home/home.module").then(m => m.HomeModule)
+  },
+  { path: "vehicles",
+    loadChildren: () =>
+      import("./vehicles/vehicles.module").then(m => m.VehiclesModule)
+  },
+  { path: "contact",
+    loadChildren: () =>
+      import("./contact/contact.module").then(m => m.ContactModule)
+  }
 ]
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    VehiclesComponent,
-    ContactComponent,
-    CarsComponent,
-    CarComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    MatButtonModule,
     MatTabsModule,
-    MatCardModule,
-    MatMenuModule
+    HomeModule,
+    VehiclesModule,
+    ContactModule
   ],
   providers: [],
   bootstrap: [AppComponent]
